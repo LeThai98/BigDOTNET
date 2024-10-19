@@ -16,3 +16,7 @@
 - Create Injector Activation Middleware : FirstSimpleActivatedMiddleware , SecondSimpleActivatedMiddleware
 - Pass data between Middleware:  using context.Items.Add() method
 
+## 3. Using Staic Middleware && Use the UseRouting() + UseEndpoints() middleware 
+### Branch Name: static_middleware
+- Use static middleware : UseStatic() that will use the html file in wwwroot folder
+- Use UseRouting + UseEndpoints ( is also terminate Middleware) to work with specific endpoint

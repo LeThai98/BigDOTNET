@@ -21,9 +21,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+app.UseRouting();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Use the Endpoint Middleware
+app.UseEndpoints((endpoints) =>{
+    endpoints.MapGet("/sanpham.html", async context =>
+    {
+        await context.Response.WriteAsync("Day la trang san pham!");
+    });
+});
+
 
 /*
     Use Custom Middleware with brach in the pipeline
