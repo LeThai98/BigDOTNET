@@ -11,3 +11,8 @@
 - Create Custom Middleware : HandleMapTest1, HandleMapTest2
 - Use Map() and pass the delegate: IApplicationBuilder => { }
 
+## 3. Create Injector Activation Middleware( using IMiddleware Interface) & Pass data between Middlewares 
+### Branch Name: middleware_activation
+- Create Injector Activation Middleware : FirstSimpleActivatedMiddleware , SecondSimpleActivatedMiddleware
+- Pass data between Middleware:  using context.Items.Add() method
+

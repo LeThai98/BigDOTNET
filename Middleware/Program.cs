@@ -8,7 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddSingleton<FirstSimpleActivatedMiddleware>();
+builder.Services.AddSingleton<SecondSimpleActivatedMiddleware>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,7 +36,9 @@ app.Map("/map2", builder => {
     builder.UseHandleMapTest2();
 });
 
-
+// Use the Injector Activation Middleware
+app.UseFirstSimpleActivatedMiddleware();
+app.UseSecondSimpleActivatedMiddleware();
 /*
     Use Use, Map, and Run extension methods to add middleware to the request pipeline.
 */
@@ -67,20 +70,3 @@ app.Run(async context =>
 });
 
 app.Run();
-
-
-static void HandleMapTest1(IApplicationBuilder app)
-{
-    app.Run(async context =>
-    {
-        await context.Response.WriteAsync("Map Test 1");
-    });
-}
-
-static void HandleMapTest2(IApplicationBuilder app)
-{
-    app.Run(async context =>
-    {
-        await context.Response.WriteAsync("Map Test 2");
-    });
-}
