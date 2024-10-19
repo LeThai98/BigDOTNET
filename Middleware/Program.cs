@@ -1,3 +1,5 @@
+using Middleware.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,6 +23,18 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+/*
+    Use Custom Middleware with brach in the pipeline
+*/
+app.Map("/map1", builder => {
+    builder.UseHandleMapTest1();
+});
+
+app.Map("/map2", builder => {
+    builder.UseHandleMapTest2();
+});
+
 
 /*
     Use Use, Map, and Run extension methods to add middleware to the request pipeline.
@@ -53,3 +67,20 @@ app.Run(async context =>
 });
 
 app.Run();
+
+
+static void HandleMapTest1(IApplicationBuilder app)
+{
+    app.Run(async context =>
+    {
+        await context.Response.WriteAsync("Map Test 1");
+    });
+}
+
+static void HandleMapTest2(IApplicationBuilder app)
+{
+    app.Run(async context =>
+    {
+        await context.Response.WriteAsync("Map Test 2");
+    });
+}
